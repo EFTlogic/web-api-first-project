@@ -1,6 +1,48 @@
-﻿
-const signIn =async() => {
+﻿const checkPass = async () => {
+    const password = document.querySelector("#password").value;
     try {
+        if (password == '') {
+            throw ("enter password");
+        }
+
+        const response = await fetch('api/Passwords', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(password)
+        })
+
+        if (!response.ok) {
+            throw ("try again");
+        }
+        const score = await response.json();
+        const progress = document.querySelector("#passwordProgress");
+        progress.value = score;
+        if (score < 3) {
+            throw ("not a strong password");
+        }
+
+
+    }
+    catch (e) {
+        alert(e);
+    }
+
+
+}
+
+
+const signIn = async () => {
+
+    try {
+        checkPass();
+        const progress = document.querySelector("#passwordProgress").value;
+
+        if (progress < 3) {
+            return;
+        }
+    
         const postData = {
             email: document.querySelector("#email").value,
             firstName: document.querySelector("#firstName").value,
@@ -75,3 +117,5 @@ const newUser = () => {
     const newUser = document.querySelector("#newUser");
     newUser.style.display = "none"
 }
+
+

@@ -34,7 +34,7 @@ namespace WebApi.Controllers
                         return user;
                 }
             }
-            return NotFound();
+            return NoContent();
             
         }
         
@@ -46,8 +46,7 @@ namespace WebApi.Controllers
             int numberOfUsers = System.IO.File.ReadLines(FilePath).Count();
             user.Id = numberOfUsers + 1;
             string userJson = JsonSerializer.Serialize(user);
-            System.IO.File.AppendAllText(FilePath, userJson +
-            Environment.NewLine);
+            System.IO.File.AppendAllText(FilePath, userJson + Environment.NewLine);
             return CreatedAtAction(nameof(Get),new {Id = user.Id },user);
         }
 

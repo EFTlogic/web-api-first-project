@@ -17,6 +17,8 @@
             <input required id="lastName" placeholder="last name" />
             <p>password</p>
             <input required id="password" placeholder="password" type="password" />
+            <button onclick="checkPass()">Check password strength</button>
+            <progress id="passwordProgress" value="0" max="4"></progress>
             <br />
             <button onclick="signIn()">sign in</button>
         </div>
