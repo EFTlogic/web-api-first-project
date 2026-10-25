@@ -36,7 +36,7 @@
 const signIn = async () => {
 
     try {
-        checkPass();
+        await (checkPass());
         const progress = document.querySelector("#passwordProgress").value;
 
         if (progress < 3) {
